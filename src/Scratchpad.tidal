@@ -1,0 +1,39 @@
+ded s = p s $ silence
+
+setcps (123/60/4)
+
+p "test" $ n "1 1 [2 5]*2 [7 4]" # sound "amencutup"
+ded "test"
+
+p "aab" $ stack [
+  n "18*2" # sound "amencutup" # n (irand 16),
+  "25",
+  "32",
+  "20"
+]
+ded "aab"
+
+setcps (136/60/4)
+d1 $ sound "amencutup*10" # n (irand 32)
+d2 $ sound "bottle*10" # n (irand 32)
+
+p "above-and-beyond" $ n "18*2 25 32 20" # sound "amencutup"
+ded "above-and-beyond"
+
+p "amen-test" $ n "18" # sound "amencutup"
+p "amen-test" $ n "20" # sound "amencutup"
+p "amen-test" $ n "25" # sound "amencutup"
+p "amen-test" $ n "30" # sound "amencutup"
+p "amen-test" $ n "32" # sound "amencutup"
+p "amen-test" $ n "34" # sound "amencutup"
+p "amen-test" $ n "34" # sound "amencutup"
+ded "amen-test"
+
+p "amenrandom" $ sound "amencutup*8" # n (irand 16)
+
+p "snare" $ sound "hh hh hh hh"
+p "beep" $ sound "arpy"
+p "clap yo hands" $ "cp*12"
+
+
+hush
