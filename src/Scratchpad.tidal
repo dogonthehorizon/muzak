@@ -3,11 +3,16 @@ ded s = p s $ silence
 setcps (136/60/4)
 
 p "baseline-amen"
-  $ every 6 (slow "2 1 2")
-  $ every 4 (|* speed "1.5")
-  $ every 16 (|+ pan sine)
-  $ sound "amencutup*10"
-  # n (irand 128)
+  $ stack [
+    sound (samples "bassdm*10?" (irand 24)),
+    --sound (samples "bottle*10" (irand 12)),
+    slowcat [
+      every 6 (slow "2 1 2")
+      $ every 4 (|* speed "1.5")
+      $ every 16 (|+ pan sine)
+      $ sound (samples "amencutup*10" (irand 32))
+    ]
+  ]
 
 ded "baseline-amen"
 
@@ -39,6 +44,5 @@ p "amen-test" $ n "20" # sound "amencutup"
 p "amen-test" $ n "25" # sound "amencutup"
 p "amen-test" $ n "30" # sound "amencutup"
 p "amen-test" $ n "32" # sound "amencutup"
-p "amen-test" $ n "34" # sound "amencutup"
 p "amen-test" $ n "1" # sound "amencutup"
 ded "amen-test"
