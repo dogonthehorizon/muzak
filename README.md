@@ -13,6 +13,8 @@ SuperDirt.start
 cd ~/git/muzak && stack exec atom .
 ```
 
+TODO need some more info on setting up the sub-module samples
+
 ## Installation
 
 ### macOS

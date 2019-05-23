@@ -1,0 +1,4 @@
+[submodule "Dirt-Samples"]
+	path = Dirt-Samples
+	url = git@github.com:dogonthehorizon/Dirt-Samples.git
+	branch = master
