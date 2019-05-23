@@ -1,11 +1,68 @@
 ded s = p s $ silence
 
-setcps (136/60/4)
+setcps (160/60/4)
+
+cold_sweat n' = sound $ samples "cold_sweat2*8" $ irand n'
+
+p "cold_sweat"  $ slowcat [
+  cold_sweat 8,
+  cold_sweat 2,
+  cold_sweat 6,
+  cold_sweat 4
+] # speed (irand 12)
+
+p "cold_sweat_half"
+  $ slow 2
+  $ slowcat [
+    cold_sweat 4,
+    cold_sweat 6,
+    cold_sweat 2,
+    cold_sweat 2
+  ] # speed (irand 2)
+
+p "bassline"
+  $ sound (samples "bass*8" (irand 24))
+  # attack sine
+  # legato 1
+
+p "bassline_half"
+  $ palindrome
+  $ linger 0.25
+  $ sound (samples "bass*8" (irand 24))
+  # speed (-10)
+  # attack sine
+  # legato 1
+
+d1 $ stack [
+  every 2 (|* pan sine)
+    $ chop 32 (sound "bev*10")
+    |* gain sine,
+  sound (samples "cold_sweat2*8" (irand 8))
+]
+
+
+d1 $ slowcat [
+  every 3 (0.25 <~)
+    $ every 4 (0.25 <~)
+    $ striate 16
+    $ sound "cold_sweat:1",
+  every 3 (0.25 <~)
+    $ every 4 (0.25 <~)
+    $ striate 256
+    $ sound "cold_sweat:2"
+]
+
+p "cold_sweat"
+  $ randslice 32
+  $ sound "cold_sweat:1"
+  # cut 1
+
+-- 119 BPM
 
 p "baseline-amen"
   $ stack [
-    sound (samples "bassdm*10?" (irand 24)),
-    --sound (samples "bottle*10" (irand 12)),
+    --sound (samples "bassdm*10?" (irand 24)),
+    sound (samples "bottle*10" (irand 12)),
     slowcat [
       every 6 (slow "2 1 2")
       $ every 4 (|* speed "1.5")
