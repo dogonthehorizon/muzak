@@ -1,8 +1,11 @@
 ded s = p s $ silence
 
-setcps (160/60/4)
+setcps (89/60/4)
 
-cold_sweat n' = sound $ samples "cold_sweat2*8" $ irand n'
+cold_sweat n' =
+  sound
+    $ samples "cold_sweat2*9"
+    $ irand n'
 
 p "cold_sweat"  $ slowcat [
   cold_sweat 8,
@@ -59,16 +62,41 @@ p "cold_sweat"
 
 -- 119 BPM
 
+d1 $ randslice 8
+   $ sound "2aSample:25*9"
+   # speed "1.2"
+
+setcps (89/60/4)
+
+p "StudyIn2A" $ stack [
+  sound "808bd:1*4?",
+  randslice 12
+    $ sound "2aSample:7*8"
+    # cut 1
+    # speed "0.2",
+  sound "808:1 808:4 ~ ~ ~ 808:1*2 808:4 ~",
+  sound "can"
+    # n (irand 12)
+    # gain "0.9",
+  loopAt "6" $ sound "2aSample:27~~~" # speed "10.5"
+]
+
+
+setcps (136/60/4)
+
 p "baseline-amen"
   $ stack [
-    --sound (samples "bassdm*10?" (irand 24)),
-    sound (samples "bottle*10" (irand 12)),
-    slowcat [
-      every 6 (slow "2 1 2")
+    sound "808bd:1*10?",
+    randslice 10
+       $ sound "2aSample:3*9"
+       # cut 1
+       # speed "0.2",
+    sound (samples "2aSample*10" (irand 119)) # legato 1,
+    every 6 (slow "2 1 2")
       $ every 4 (|* speed "1.5")
       $ every 16 (|+ pan sine)
       $ sound (samples "amencutup*10" (irand 32))
-    ]
+      # legato 1
   ]
 
 ded "baseline-amen"
